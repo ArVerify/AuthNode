@@ -1,8 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from oauthlib.oauth2 import WebApplicationClient
 import requests
 import json
-from arweave_handler import send_to_arweave, tip_received
+from arweave_handler import store_on_arweave, tip_received
 from config import GOOGLE_DISCOVERY_URL, GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID, FEE
 
 app = Flask(__name__)
@@ -72,9 +72,9 @@ def callback():
 
     print(unique_id, users_email, picture, users_name)
 
-    tx = send_to_arweave(address, FEE)
+    tx = store_on_arweave(address)
 
-    return jsonify({'status': 'success', 'id': tx.id})
+    return redirect("http://127.0.0.1:8080/#/?txId={}".format(tx.id), 200)
 
 
 @app.route("/verify", methods=['GET'])
