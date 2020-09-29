@@ -72,9 +72,9 @@ def callback():
 
     print(unique_id, users_email, picture, users_name)
 
-    tx = store_on_arweave(address)
+    tx_id = store_on_arweave(address)
 
-    return redirect("http://127.0.0.1:8080/#/?txId={}".format(tx.id), 200)
+    return redirect("http://127.0.0.1:8080/#/?txId={}".format(tx_id), 200)
 
 
 @app.route("/verify", methods=['GET'])
