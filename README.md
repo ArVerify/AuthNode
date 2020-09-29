@@ -39,3 +39,4 @@ A public Dockerfile will be released soon
 *   GET /verify/callback
 
     Returns `{'status': 'success', 'id': [TX_ID]}` when verification was successful
+    
