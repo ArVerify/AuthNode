@@ -1,6 +1,4 @@
 # ArVerify - AuthNode
-```Note: This is a proof of concept```
-
 ArVerify is service which allows users to have their addresses verified via Google Sign On.
 The verification process is implemented inside an AuthNode.
 To ensure that every AuthNode can be trusted, the AuthNode is
@@ -13,6 +11,7 @@ staked in the DAO.
     FEE=(you choose the Fee, its in AR)
     GOOGLE_CLIENT_ID=...
     GOOGLE_CLIENT_SECRET=...
+    DOMAIN=...
     ```
 2.  Copy your arweave-keyfile into the directory and save
     it as `arweave-keyfile.json`

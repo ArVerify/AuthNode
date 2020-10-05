@@ -1,11 +1,23 @@
 import arweave
 from simple_graphql_client import GraphQLClient, load
-from config import ARWEAVE_KEYFILE
+from config import ARWEAVE_KEYFILE, FEE, DOMAIN
 from typing import Union
 
 wallet = arweave.Wallet(ARWEAVE_KEYFILE)
 
 gql_client = GraphQLClient(base_url="https://arweave.dev/graphql")
+
+
+def post_genesis_transaction():
+    transaction = arweave.Transaction(wallet)
+    transaction.add_tag(name="App-Name", value="ArVerifyDev")
+    transaction.add_tag(name="Type", value="Genesis")
+    transaction.add_tag(name="Fee", value=str(FEE))
+    transaction.add_tag(name="Domain", value=str(DOMAIN))
+    transaction.sign()
+    transaction.send()
+
+    return transaction.id
 
 
 def tip_received(owner: str, fee: float) -> bool:
@@ -39,10 +51,12 @@ def get_verification_id(verified_address: str, auth_nodes: [str]) -> Union[str, 
 
 
 def store_on_arweave(verified_address: str) -> str:
+    # check if address has been verified before
     auth_nodes = ["s-hGrOFm1YysWGC3wXkNaFVpyrjdinVpRKiVnhbo2so"]
     transaction_id = get_verification_id(verified_address, auth_nodes)
+    # if the address hasn't been verified yet, create a transaction
     if not transaction_id:
-        # store verification on chain
+        # store verification on Arweave
         transaction = arweave.Transaction(wallet)
         transaction.add_tag(name="App-Name", value="ArVerifyDev")
         transaction.add_tag(name="Type", value="Verification")

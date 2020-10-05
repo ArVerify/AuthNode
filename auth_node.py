@@ -3,15 +3,14 @@ from oauthlib.oauth2 import WebApplicationClient
 import requests
 import json
 from arweave_handler import store_on_arweave, tip_received
-from config import GOOGLE_DISCOVERY_URL, GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID, FEE
+from config import GOOGLE_DISCOVERY_URL, GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID, FEE, DOMAIN
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 
 cors = CORS(app)
 
-if not (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET and FEE):
+if not (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET and FEE and DOMAIN):
     raise Exception("Missing required configuration in .env-File")
 
 # OAuth 2 client setup

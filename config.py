@@ -10,3 +10,5 @@ GOOGLE_DISCOVERY_URL = "https://accounts.google.com/.well-known/openid-configura
 ARWEAVE_KEYFILE = os.environ.get("ARWEAVE_KEYFILE", "arweave-keyfile.json")
 
 FEE = float(os.environ.get("FEE", None))
+
+DOMAIN = os.environ.get("DOMAIN", None)
