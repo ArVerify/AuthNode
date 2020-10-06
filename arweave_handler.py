@@ -12,7 +12,7 @@ def post_genesis_transaction():
     transaction = arweave.Transaction(wallet)
     transaction.add_tag(name="App-Name", value="ArVerifyDev")
     transaction.add_tag(name="Type", value="Genesis")
-    transaction.add_tag(name="Fee", value=str(FEE))
+    transaction.add_tag(name="Fee", value=f"{FEE:.12f}")
     transaction.add_tag(name="Domain", value=str(DOMAIN))
     transaction.sign()
     transaction.send()
